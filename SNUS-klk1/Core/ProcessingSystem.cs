@@ -12,7 +12,6 @@ public class ProcessingSystem
     public event Action<Job, int> JobCompleted;
     public event Action<Job, Exception> JobFailed;
 
-    // polja
     private readonly int _maxQueueSize;
     private readonly PriorityQueue<Job, int> _queue = new();
     private readonly SemaphoreSlim _queueSemaphore = new(0);
@@ -139,7 +138,7 @@ public class ProcessingSystem
                     return;
                 }
 
-                throw new TimeoutException($"Job {job.Id} exceeded 2 seconds on attempt {attempt}.");
+                throw new TimeoutException($"Job {job.Id} exceeded 2 seconds on attempt {attempt}");
             }
             catch (Exception ex)
             {

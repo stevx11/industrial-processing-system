@@ -15,14 +15,14 @@ class Program
         var doc           = XDocument.Load("SystemConfig.xml");
         int producerCount = int.Parse(doc.Root.Element("WorkerCount").Value);
 
-        Console.WriteLine($"Starting {producerCount} producer threads...");
+        Console.WriteLine($"Starting {producerCount} producer threads");
 
         var cts       = new CancellationTokenSource();
         var producers = Enumerable.Range(0, producerCount)
             .Select(i => Task.Run(() => ProducerLoop(system, i, cts.Token)))
             .ToList();
 
-        Console.WriteLine("Press Enter to stop.");
+        Console.WriteLine("Press Enter to stop");
         Console.ReadLine();
 
         cts.Cancel();
@@ -36,7 +36,7 @@ class Program
         {
         }
 
-        Console.WriteLine("System stopped.");
+        Console.WriteLine("System stopped");
     }
 
     private static async Task ProducerLoop(ProcessingSystem system, int producerId, CancellationToken ct)
@@ -49,10 +49,10 @@ class Program
                 var handle = system.Submit(job);
 
                 if (handle == null)
-                    Console.WriteLine($"[Producer {producerId}] Queue full — job {job.Id} rejected.");
+                    Console.WriteLine($"[Producer {producerId}] Queue full - job {job.Id} rejected");
                 else
                 {
-                    Console.WriteLine($"[Producer {producerId}] Submitted {job.Type} job {job.Id} (priority {job.Priority}).");
+                    Console.WriteLine($"[Producer {producerId}] Submitted {job.Type} job {job.Id} (priority {job.Priority})");
 
                     _ = handle.Result.ContinueWith(t =>
                     {

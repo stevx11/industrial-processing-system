@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SystemConfig>
+  <!-- Number of worker tasks consuming the queue (also used as the producer count in the demo) -->
+  <WorkerCount>4</WorkerCount>
+
+  <!-- Maximum number of pending jobs; further submissions are rejected -->
+  <MaxQueueSize>100</MaxQueueSize>
+
+  <!-- Jobs enqueued at startup. Lower Priority value = processed first -->
+  <Jobs>
+    <Job Type="Prime" Payload="numbers:10_000,threads:3" Priority="1" />
+    <Job Type="Prime" Payload="numbers:50_000,threads:8" Priority="2" />
+    <Job Type="IO"    Payload="delay:500"                Priority="3" />
+    <Job Type="IO"    Payload="delay:1_500"              Priority="5" />
+  </Jobs>
+</SystemConfig>
